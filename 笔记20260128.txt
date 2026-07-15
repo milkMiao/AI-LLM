@@ -1,0 +1,358 @@
+pip install langchain -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+pip show langchain
+
+langgraph
+
+Python 3.10以上，>=3.10
+
+1、现成代码  => 跑通
+2、AI编程工具 => 改写 成自己的项目
+
+Function Calling
+
+环境变量：DASHSCOPE_API_KEY
+Tool： SerpAPI
+
+API KEY（第三方服务的认证）
+
+AI编程：Cursor, Trae, Wucai Code
+
+@3-LLMChain.py 这个是基于langchain，做了数学计算工具，
+
+CoT Chain of Thought，思维链
+复杂问题 拆解成不同的步骤
+Thought1
+Action
+Observation
+
+Thought2
+Action
+Observation
+
+...
+
+找到了答案
+
+
+Question: 我需要回答的问题
+Thought: 回答这个上述我需要做些什么
+Action: "{tool_names}" 中的一个工具名
+Action Input: 选择这个工具所需要的输入
+Observation: 选择这个工具返回的结果
+...（这个 思考/行动/行动输入/观察 可以重复N=5次）
+Thought: 我现在知道最终答案
+Final Answer: 原始输入问题的最终答案
+
+
+Wucai Code
+
+
+
+任务1: 分析以下文本的情感倾向，并统计其中的行数：'这个产品非常好用，我很喜欢它的设计，使用体验非常棒！
+价格也很合理，推荐大家购买。
+客服态度也很好，解答问题很及时。'
+结果: 根据分析，该文本的情感倾向为积极，共有3行。
+
+任务2: 将以下CSV数据转换为JSON格式：'name,age,comment
+张三,25,这个产品很好
+李四,30,服务态度差
+王五,28,性价比高'
+结果: 转换后的JSON格式数据如下：
+
+```json
+[
+  {
+    "name": "张三",
+    "age": "25",
+    "comment": "这个产品很好"
+  },
+  {
+    "name": "李四",
+    "age": "30",
+    "comment": "服务态度差"
+  },
+  {
+    "name": "王五",
+    "age": "28",
+    "comment": "性价比高"
+  }
+]
+```
+
+AI编程工具：Cursor, Trae, Wucai Code
+http://class.wucai.com/docs/wucai-installation
+
+Step1, 下载nodejs
+https://nodejs.org/zh-cn/download
+
+Step2, npm install -g @wucai/wucai-code
+
+
+1、@1-simple_toolchain.py 理解代码，帮撰写文档 .html
+2、帮我搭建一个网络故障诊断类的Agent，工具之间存在串联，第一个工具的输出是第二个工具的输入；如果有10个工具的话，会有很多输入输出的关系。
+希望Agent，在适当的时候调用适合的工具；
+===
+可以参考@1-simple_toolchain.py 编写新的Python
+
+3、针对这10个tool，增加print，方便我了解调用的过程（输入和输出结果，以及对应调用的哪个工具）
+
+4、帮我整理 2-network_diagnosis_agent_with_trace.py 代码逻辑，写入到 .html 可以用mermaid和svg
+
+
+Q：从业人员可能太基础，小白学员估计云里雾里，先交代一下每个例子的目的和原理
+AI Agent 故障检测器（搭配tool，来完成任务）
+
+Q：老师，1 、langchain和langgraph ，在使用时有什么区别？ 把 langgraph 研究好，是不是 就不用学 langchain了？
+langchain 是基础工具箱
+langgraph 是高阶（以图进行 执行链路的设计，更灵活）
+
+
+
+Q：环境如何配置
+python >=3.10 
+IDE：Cursor, Trae 
+API KEY：DASHSCOPE_API_KEY
+如何配置 DASHSCOPE_API_KEY
+http://class.wucai.com/docs/3-dashscope
+
+
+Q：是不是有FunctionCall功能的agent都是react agent？
+react是agent的基本模式
+
+Q：短期记忆对应的长期记忆是指和user的历史对话，跟es有什么关系？
+短期记忆： 历史对话
+长期记忆：文件检索（可以利用 数据库，比如es）
+
+Q：2、用开源代码进行改造的项目，例如千问 Agent ，open manus 等 ，在公司可以申请软著产权吗？
+
+
+Q：想问下老师Agent和RAG的关系
+Agent 是“人”
+RAG 是知识库，专门处理知识检索
+
+Q：为啥AI写的是python，不是JAVA C C++
+可以让AI写Java, C++
+
+
+Q：：老师“”那些是自己给他的指令，后面是他自己生成的还是咱写给他的，那个MESSAGE什么的
+message是对话的记录
+
+Q：威尼斯：哪些是咱给他的，'''和'''中间的是咱们给的吗？哪些是咱们给的，哪些是他生成的。代码哪些是要给的
+
+
+刚刚用vscode的agent，写了一个网络故障诊断的agent，感觉好像写成功了啊
+
+
+Q：1. agent 是如何决定调用哪个 tool呢，准确吗？
+2. 例子中的知识库，都是写简单的案例，企业工程中的知识库会用到外部的数据库吗？
+是的
+
+Q：openmanus调用哪个模型消耗的token多 因为自己跑发现百炼欠费了
+
+
+Q：Elasticsearch是一个数据课
+
+
+Q：老师，如何查看最终发送给大模型的prompt文本？ langchain会对代码中的prompt做封装吗？
+添加调试语句
+
+
+数据库
+
+
+
+
+Q：我就是写java的，转python感觉并没那么难
+
+
+Q：所有场景都能使用langchain吗，需要根据不同的场景选择使用不同的架构吗
+
+
+Q：老师这个笔记课后会分享吗，还有那个基本知识相关的网站从哪里获取？
+class.wucai.com
+
+
+Q：思路明白，但是实战感觉会不行怎么办？
+20% => 30%
+
+
+Q：api_key = os.environ.get('DASHSCOPE_API_KEY')，在本地配置了环境变量，但是运行的时候，无法找到这个环境变量是什么情况
+可以重启IDE
+
+token计算是我输入的还是模型输出的
+
+
+Q：陈老师 ，wucai 可以离线安装使用么？
+需要网络环境
+
+我们以后在工作中，能用 wucal吗？
+
+
+
+Q：wucai可以写C++代码吗
+可以
+
+
+
+Q：让AI干活写代码的时候，是先让他自己写工具（也就是你需要的功能），然后发现缺少某部分功能的话，你在通过提示词要求他增加对应的工具吗
+是的
+
+Q：老师，LangGraph后面哪节课能讲到啊
+Agent范式设计：ReAct反应式，深思熟虑，混合式
+
+Q：老师做agent，有哪些技巧，就是骚操作，来提高agent能力，我做过好几个agent，但是效果都没那么理想。该有的模块都有，但是不知道怎么优化
+建立测试集；比如50个问题，然后让Agent回答
+
+
+Q：老师，我看PPT还有几页没讲是下节课讲吗
+
+
+Q：老师，公司内网怎么使用cursor，有什么建议
+需要大模型的环境
+
+Q：最近在读openmanus Qwen-Agent源码，我们把这两个搞精通是不是就可适应各种场景
+是的！
+
+
+Q：学堂里讲的是jupyter 和pycharm安装 但是今天讲的curser 不懂
+jupyter, pycharm 是运行环境
+cursor：帮你写代码的工具，cursor 是一个AI
+
+Q：Cursor对应代码安全性和私密性怎么维护的？
+Privacy
+
+
+Q：发现用gemina画图总画的不太满意是提示词不够明确，怎么提高gemina试用效率
+prompt，多尝试；=> 缺什么，告诉它进行优化
+
+
+Q：需要让班班开通五彩，每天2000次吗
+下载，然后使用即可（需要使用 qwen oauth模式，里面会有 chat.qwen.ai的注册，需要你的邮件激活）
+
+
+Q：哈哈，其实老师您刚才先讲langchain≈Coze就好了，不然对小白来说，langchain概念还没想明白，直接实操看代码实在是有点跟不上。
+
+
+Q：问题提好了，他帮你写的代码就好
+对的
+
+
+
+💐💐💐💐💐💐💐💐💐👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻👏🏻
+
+
+Q：langchain是一个python库，python库就是提供一些代码能力，帮你完成某一个具体的任务
+是的
+
+Q：怎么用cursor帮我写代码吗
+
+
+Q：openmenus做竞品分析时，AI总是生成相同的问题，导致一直循环相同问题，导致AI计划步骤走不完，让AI分析解决，也解决不了。试过10次以上了，有没有好思路
+设置 max_step
+
+
+python3.14运行代码有点问题
+
+
+狂徒老哥，你说的是真透彻。。。
+
+
+Q：换大模型开发框架（qwen-agent, langgraph, etc)涉及框架相关代码的变动，以后会有一种通用框架，类似接口编程，可以方便换llm 开发框架吗
+
+
+@狂徒 很稳
+
+
+Q：claude code能在内网用吗？听说很好，最强？
+是很强，不能内网，因为是付费工具
+
+Q：pycharm 和 cursor 区别知道了，langchain 和 cursor 区别是啥
+cursor = AI写代码的工具，帮你写各种程序
+langchain 是LLM的开发框架，你可以让Cursor 一个langchain应用
+Cursor = 程序员
+langchain = 你要打造的AI应用
+
+
+Q：2、之前rag大赛那个可以用es替代faiss吗
+可以的
+
+3、现在面试还有笔试，需要做类似LeetCode的题目，怎么应对呢
+刷题 + AI辅助解读
+
+
+Q：tools与mcp对比哪个消耗token多
+都差不多
+
+
+Q：老师，Python要学到什么程度，然后搭配ai能够开发比较复杂的项目，并且ai修复不了的问题自己手动修复呢？
+Step1, python 基础语法可以了解
+Step2，可以读 现有的代码，AI辅助你来读
+
+Q：copilot怎么样？
+也还可以，最早的写代码的工具
+
+
+Q：老师 我们会用 claude 写代码吗？
+如果你有 claude code, 或者 cursor，可以用到 claude模型
+trae
+
+Q：杨李坤喷现在的LLM就是一个黑盒，大家都是在赌他生成的对不对。
+
+
+
+
+Q：最近clawdbot好像很火，这个东西有必要拿来应用吗，好像很耗token
+
+
+Q：博士，想问下Claude code和gemini-cli的主要区别是什么，如果想开发code agent，基于哪个好
+用Claude Code，因为它有 claude opus是最好的编程大模型
+
+
+上一节不是有讲吗
+
+
+Q：manus就是被Meta 20亿美刀收购的公司，然后有人用一天写了个类似的东西，开源了，叫openmanus
+
+
+Q：最近clawdbot在x上很火，都在买macmini来部署，
+可以简单讲下吗
+
+Q：coze上限能讲讲吗？
+比如 你想要灵活的切分 文本（知识库的项目）
+
+Q：老师，可以这么理解吗？langchain是各种类型的ai应用，我们可以直接用这些ai应用的框架，可以用cursor来修里面的内容。对吗？
+对的
+
+
+
+
+用wucai写一段代码，然后让llm用langchain的框架搭建一个智能体，我们要用到langchain里的各种工具，
+
+
+Q：那么我们需要安装什么才能用的上langchain的这个工具呢，还是大模型系带langchain的功能？
+langchain 是第三方的工具箱，pip install langchain
+大模型就是一个神经网络
+
+
+
+Q：coze我们很容易看到web界面，操作什么都很好理解，langchain也是工具的话在哪里?
+高代码
+Coze 是可以拖拉拽的操作，比较直观
+
+可以让Cursor，帮你梳理 这个代码的逻辑，写入到 .html
+
+
+
+Q：在实际应用中，一个LangChain Agent是如何自主决定何时调用工具、何时直接回答的？说明LLM的思考过程如何被转化为具体行动序列的
+让LLM 自问自答
+===
+Question: 我需要回答的问题
+Thought: 回答这个上述我需要做些什么
+Action: "{tool_names}" 中的一个工具名
+Action Input: 选择这个工具所需要的输入
+Observation: 选择这个工具返回的结果
+===
+
+class.wucai.com
+
