@@ -2,10 +2,14 @@ import os
 import textwrap
 import time
 
-from langchain_community.chat_models import ChatTongyi
-from langchain_core.tools import tool
-from langchain_core.prompts import PromptTemplate
+import dashscope
+from dotenv import load_dotenv
 from langchain.agents import create_agent
+from langchain_core.prompts import PromptTemplate
+from langchain_core.tools import tool
+from langchain_community.chat_models import ChatTongyi
+
+load_dotenv()
 
 # 定义了LLM的Prompt Template
 CONTEXT_QA_TMPL = """
@@ -34,6 +38,9 @@ def output_response(response: str) -> None:
 
 # 从环境变量获取 API Key
 api_key = os.getenv('DASHSCOPE_API_KEY')
+if not api_key:
+    raise ValueError("Missing DASHSCOPE_API_KEY. Copy CASE-LangChain使用/.env.example to .env and set your key.")
+dashscope.api_key = api_key
 
 # 定义LLM
 llm = ChatTongyi(model_name="qwen-turbo", dashscope_api_key=api_key)

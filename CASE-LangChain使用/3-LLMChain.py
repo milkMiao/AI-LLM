@@ -1,12 +1,18 @@
 import os
-from langchain_community.agent_toolkits.load_tools import load_tools
-from langchain_community.chat_models import ChatTongyi
+
+import dashscope
+from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain_core.tools import tool
-import dashscope
+from langchain_community.agent_toolkits.load_tools import load_tools
+from langchain_community.chat_models import ChatTongyi
+
+load_dotenv()
 
 # 从环境变量获取 dashscope 的 API Key
 api_key = os.getenv('DASHSCOPE_API_KEY')
+if not api_key:
+    raise ValueError("Missing DASHSCOPE_API_KEY. Copy CASE-LangChain使用/.env.example to .env and set your key.")
 dashscope.api_key = api_key
 
 # 加载模型 (使用 ChatModel 以支持 tool calling)
